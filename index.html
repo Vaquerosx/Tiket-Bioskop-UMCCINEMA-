@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMCCINEMA - Premium Movie Experience</title>
+    <meta name="description" content="Experience luxury cinema at UMCCINEMA. Book your premium movie tickets now.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">UMC<span class="gold">CINEMA</span></span>
+            </div>
+            <nav class="nav">
+                <a href="#movies" class="nav-link active">Movies</a>
+                <a href="#" class="nav-link" onclick="showHistory()">My Tickets</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-particles"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="hero-subtitle">Welcome to</span>
+                UMCCINEMA
+                <span class="hero-tagline">Premium Movie Experience</span>
+            </h1>
+            <p class="hero-desc">Immerse yourself in luxury. Experience cinema like never before with our
+                state-of-the-art theaters and premium seating.</p>
+            <a href="#movies" class="btn btn-primary btn-glow">
+                <span>Explore Movies</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section id="movies" class="movies-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Now Showing</span>
+                <h2 class="section-title">Featured Films</h2>
+                <p class="section-desc">Choose from our selection of blockbuster movies</p>
+            </div>
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movies will be populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Progress Steps -->
+            <div class="booking-progress">
+                <div class="progress-step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Schedule</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Seats</span>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Payment</span>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <!-- Step 1: Schedule & Type -->
+                <div class="booking-step active" id="step1">
+                    <div class="movie-header">
+                        <div class="movie-poster-small" id="modalPoster"></div>
+                        <div class="movie-info-modal">
+                            <h3 id="modalTitle"></h3>
+                            <p id="modalTheater"></p>
+                            <p class="movie-price" id="modalPrice"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-input" id="customerName" placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Showtime</label>
+                        <div class="showtime-grid" id="showtimeGrid">
+                            <!-- Showtimes will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ticket Type</label>
+                        <div class="ticket-type-grid">
+                            <div class="ticket-type" data-type="regular" onclick="selectTicketType('regular')">
+                                <div class="type-icon">🎟️</div>
+                                <div class="type-name">Regular</div>
+                                <div class="type-price">+Rp 0</div>
+                            </div>
+                            <div class="ticket-type" data-type="vip" onclick="selectTicketType('vip')">
+                                <div class="type-icon">👑</div>
+                                <div class="type-name">VIP</div>
+                                <div class="type-price">+Rp 25.000</div>
+                                <div class="vip-badge">Premium</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-full" onclick="goToStep(2)">
+                        Continue to Seat Selection
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Step 2: Seat Selection -->
+                <div class="booking-step" id="step2">
+                    <div class="screen-container">
+                        <div class="screen">
+                            <span>SCREEN</span>
+                        </div>
+                        <div class="screen-glow"></div>
+                    </div>
+
+                    <div class="seats-container" id="seatsContainer">
+                        <!-- Seats will be populated by JS -->
+                    </div>
+
+                    <div class="seat-legend">
+                        <div class="legend-item">
+                            <div class="seat-demo available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat-demo selected"></div>
+                            <span>Selected</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat-demo taken"></div>
+                            <span>Taken</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="seat-demo vip-seat"></div>
+                            <span>VIP</span>
+                        </div>
+                    </div>
+
+                    <div class="selected-seats-summary">
+                        <p>Selected Seats: <span id="selectedSeatsText">None</span></p>
+                        <p class="summary-total">Total: <span id="summaryTotal">Rp 0</span></p>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="goToStep(1)">Back</button>
+                        <button class="btn btn-primary" onclick="goToStep(3)">
+                            Continue to Payment
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment -->
+                <div class="booking-step" id="step3">
+                    <div class="order-summary">
+                        <h4>Order Summary</h4>
+                        <div class="summary-row">
+                            <span>Movie:</span>
+                            <span id="summaryMovie"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Showtime:</span>
+                            <span id="summaryShowtime"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Seats:</span>
+                            <span id="summarySeats"></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Type:</span>
+                            <span id="summaryType"></span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="paymentTotal"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Select Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="payment-category">
+                                <h5>💳 E-Wallet</h5>
+                                <div class="payment-options">
+                                    <div class="payment-option" data-method="Gopay" onclick="selectPayment('Gopay')">
+                                        <span class="payment-name">GoPay</span>
+                                    </div>
+                                    <div class="payment-option" data-method="Dana" onclick="selectPayment('Dana')">
+                                        <span class="payment-name">Dana</span>
+                                    </div>
+                                    <div class="payment-option" data-method="Shopeepay"
+                                        onclick="selectPayment('Shopeepay')">
+                                        <span class="payment-name">ShopeePay</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-category">
+                                <h5>🏦 Bank Transfer</h5>
+                                <div class="payment-options">
+                                    <div class="payment-option" data-method="BRI" onclick="selectPayment('BRI')">
+                                        <span class="payment-name">BRI</span>
+                                    </div>
+                                    <div class="payment-option" data-method="Mandiri"
+                                        onclick="selectPayment('Mandiri')">
+                                        <span class="payment-name">Mandiri</span>
+                                    </div>
+                                    <div class="payment-option" data-method="Seabank"
+                                        onclick="selectPayment('Seabank')">
+                                        <span class="payment-name">SeaBank</span>
+                                    </div>
+                                    <div class="payment-option" data-method="BSI" onclick="selectPayment('BSI')">
+                                        <span class="payment-name">BSI</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment-category">
+                                <h5>📱 Other Methods</h5>
+                                <div class="payment-options">
+                                    <div class="payment-option" data-method="QRIS" onclick="selectPayment('QRIS')">
+                                        <span class="payment-name">QRIS</span>
+                                    </div>
+                                    <div class="payment-option" data-method="Cash" onclick="selectPayment('Cash')">
+                                        <span class="payment-name">Cash (at counter)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-info" id="paymentInfo" style="display: none;">
+                        <!-- Payment details shown here -->
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-secondary" onclick="goToStep(2)">Back</button>
+                        <button class="btn btn-primary btn-glow" id="confirmBtn" onclick="confirmPayment()" disabled>
+                            Confirm Payment
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 13l4 4L19 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal success-modal">
+            <div class="success-animation">
+                <div class="success-checkmark">
+                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M8 12l3 3 5-6" />
+                    </svg>
+                </div>
+            </div>
+            <h3>Booking Confirmed!</h3>
+            <p>Your ticket has been successfully booked.</p>
+            <div class="ticket-preview" id="ticketPreview">
+                <!-- Ticket preview content -->
+            </div>
+            <button class="btn btn-primary" onclick="closeSuccessModal()">Done</button>
+        </div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal history-modal">
+            <button class="modal-close" onclick="closeHistoryModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <h3>🎟️ My Tickets</h3>
+            <div class="history-list" id="historyList">
+                <!-- History will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">UMC<span class="gold">CINEMA</span></span>
+                    <p>Premium Movie Experience</p>
+                </div>
+                <div class="footer-info">
+                    <p>© 2026 UMCCINEMA. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
