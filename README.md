@@ -1,5 +1,4 @@
-# 🎬 UMCCINEMA - Sistem Pemesanan Tiket Bioskop Premium
-
+# 🎬 UMCCINEMA - Sistem Pemesanan Tiket Bioskop 
 <div align="center">
 
 ![UMCCINEMA Banner](https://img.shields.io/badge/UMCCINEMA-Premium%20Movie%20Experience-gold?style=for-the-badge&logo=film&logoColor=white)
